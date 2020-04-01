@@ -4,7 +4,7 @@ filename = 'deployment0001_GP03FLMB.nc'
 %1a. Use the function "ncdisp" to display information about the data contained in this file
 
 
-ncdisp(filename)
+ncdisp(filename);
 
 %1b. Use the function "ncreadatt" to extract the latitude and longitude
 %attributes of this dataset
@@ -46,7 +46,7 @@ timec=time0+(time/86400);
 % 2b. Calculate the time resolution of the data (i.e. long from one
 % measurement to the next) in minutes. Hint: the "diff" function will be
 % helpful here.
-resol=diff(time/60)
+resol=diff(time/60);
 
 
 %Resolution every 15 minutes, I think.... 
@@ -57,29 +57,46 @@ resol=diff(time/60)
 % the variability in the data changes over the year?
 % Hint: Use the function "datetick" to make the time show up as
 % human-readable dates rather than the MATLAB timestamp numbers
-figure(1) 
-plot(timec,swtemp,'.')
-datetick('x','dd-mmm-yyyy')
+
+
 %% 4. Dealing with data variability: smoothing and choosing a variability cutoff
 % 4a. Use the movmean function to calculate a 1-day (24 hour) moving mean
 % to smooth the data. Hint: you will need to use the time period between
 % measurements that you calculated in 2b to determine the correct window
 % size to use in the calculation.
 
-%-->
+Temp_smooth = movmean(swtemp,96);
 
 
 % 4b. Use the movstd function to calculate the 1-day moving standard
 % deviation of the data.
+Temp_std = movstd(swtemp,96);
 
 
 %% 5. Honing your initial investigation plot
 % Building on the initial plot you made in #3 above, now add:
 %5a. A plot of the 1-day moving mean on the same plot as the original raw data
 
+
+
+
 %5b. A plot of the 1-day moving standard deviation, on a separate plot
 %underneath, but with the same x-axis (hint: you can put two plots in the
 %same figure by using "subplot" and you can specify
+figure(1) 
+subplot(2,1,1);
+plot(timec,swtemp,'.')
+datetick('x','dd-mmm-yyyy')
+
+hold on 
+
+plot(timec,Temp_smooth,'LineWidth',2)
+
+hold off
+
+subplot(2,1,2); 
+plot(timec,Temp_std)
+datetick('x','dd-mmm-yyyy')
 
 %% 6. Identifying data to exclude from analysis
 % Based on the plot above, you can see that there are time periods when the
