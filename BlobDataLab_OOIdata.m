@@ -58,6 +58,7 @@ resol=diff(time/60);
 % Hint: Use the function "datetick" to make the time show up as
 % human-readable dates rather than the MATLAB timestamp numbers
 
+% Moved below for easier plotting 
 
 %% 4. Dealing with data variability: smoothing and choosing a variability cutoff
 % 4a. Use the movmean function to calculate a 1-day (24 hour) moving mean
@@ -77,7 +78,7 @@ Temp_std = movstd(swtemp,96);
 % Building on the initial plot you made in #3 above, now add:
 %5a. A plot of the 1-day moving mean on the same plot as the original raw data
 
-
+% Moved bleow for easier plotting 
 
 
 %5b. A plot of the 1-day moving standard deviation, on a separate plot
@@ -87,7 +88,7 @@ figure(1)
 subplot(2,1,1);
 plot(timec,swtemp,'.')
 datetick('x','dd-mmm-yyyy')
-
+ylabel('Seawater Temperature C^o')
 hold on 
 
 plot(timec,Temp_smooth,'LineWidth',2)
@@ -97,6 +98,8 @@ hold off
 subplot(2,1,2); 
 plot(timec,Temp_std)
 datetick('x','dd-mmm-yyyy')
+ylabel('1-day moving standard deviation')
+
 
 %% 6. Identifying data to exclude from analysis
 % Based on the plot above, you can see that there are time periods when the
