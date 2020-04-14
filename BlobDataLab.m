@@ -56,18 +56,21 @@ swtemp_new = swtemp(k);
 timec_new = timec(k);
 
  subplot(2,1,1);
+ title ('OOI Ocean Station Papa Oceana Temperature (30m)')
 plot(timec,swtemp,'b.')
 datetick('x','dd-mmm-yyyy')
 ylabel('Seawater Temperature C^o')
 hold on 
 
-plot(timec_new,swtemp_new,'k.')
+%plot(timec_new,swtemp_new,'k.')
 
-plot(timec,Temp_smooth,'r','LineWidth',2)
+plot(timec,Temp_smooth,'r.')
 
+legend('raw data','moving mean','Location','best', 'FontSize',14)
 
 
 subplot(2,1,2); 
+title('Standard Deviation');
 plot(timec,Temp_std,'k')
 datetick('x','dd-mmm-yyyy')
 ylabel('1-day moving standard deviation')
