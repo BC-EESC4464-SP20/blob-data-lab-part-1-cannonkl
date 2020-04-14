@@ -4,7 +4,7 @@ function [timec,swtemp,timec_new, swtemp_new,Temp_smooth,Temp_std] = BlobDataLab
 %BlobDataLab Summary of this function goes here
 %   function to assess all the years of data 
 %1a. Use the function "ncdisp" to display information about the data contained in this file
-ncdisp(filename);
+ncdisp(filename)
 
 %1b. Use the function "ncreadatt" to extract the latitude and longitude
 %attributes of this dataset
