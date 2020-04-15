@@ -8,10 +8,15 @@ lon=ncread(filename_jpl,'longitude');
 lon2 = double(lon);
 time=ncread(filename_jpl,'time');
 sstAnom=ncread(filename_jpl,'sstAnom');
+OSPlat=50.3777;
+OSPlong=-144.5149;
 %%
 
-figure
+figure (1)
 worldmap([20 60],[-179 -100])
-contourfm(lat2, lon2, sstAnom(:,:,79)','linecolor','none');
-colorbar('southoutside')
+contourfm(lat2, lon2, sstAnom(:,:,14)','linecolor','none');
+colorbar('eastoutside')
 geoshow('landareas.shp','FaceColor','black')
+hold on
+scatterm(OSPlat,OSPlong,40,'m','filled')
+
