@@ -1,15 +1,51 @@
 %7. Apply the approach from steps 1-6 above to extract data from all OOI deployments in years 1-6
 
-for i= [1 3 4 5 6];
+
+for i= [1 3 4 5 6]
      
-filename = ['deployment000' [num2str(i)] '_GP03FLMB.nc'];
+filename = ['deployment000' num2str(i) '_GP03FLMB.nc'];
 
 [timec,swtemp,timec_new, swtemp_new,Temp_smooth,Temp_std]= BlobDataLab(filename);
 
-hold on
 
+hold on
+if i == 1
+    timec_five = timec;
+    swtemp_five = swtemp;
+    timec_new_five = timec_new;
+    swtemp_new_five = swtemp_new;
+    temp_smooth_five = Temp_smooth;
+    temp_std_five = Temp_std;
+else
+    timec_five = cat(1, timec_five, timec);
+    swtemp_five = cat(1, swtemp_five,swtemp);
+    timec_new_five = cat(1, timec_new_five, timec_new);
+    swtemp_new_five = cat(1, swtemp_new_five, swtemp_new);
+    temp_smooth_five = cat(1, temp_smooth_five, Temp_smooth); 
+    temp_std_five = cat(1, temp_std_five, Temp_std);
+ 
+end
 end
 
+figure (1)
+ subplot(2,1,1);
+ title ('OOI Ocean Station Papa Oceana Temperature (30m)')
+plot(timec_five,swtemp_five,'k.')
+datetick('x','dd-mmm-yyyy')
+ylabel('Seawater Temperature C^o')
+hold on 
+
+%plot(timec_new_five,swtemp_new_five,'b.')
+
+plot(timec_five,temp_smooth_five,'r.')
+
+legend('raw data','moving mean','Location','best', 'FontSize',14);
+
+subplot(2,1,2); 
+title('Standard Deviation');
+plot(timec_five,temp_std_five,'k')
+datetick('x','dd-mmm-yyyy')
+ylabel('1-day moving standard deviation')
 
 %Prior work now in a function called BlobDataLab 
 % 1. Explore and extract data from one year of OOI mooring data
