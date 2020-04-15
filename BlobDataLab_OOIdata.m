@@ -1,16 +1,14 @@
 %7. Apply the approach from steps 1-6 above to extract data from all OOI deployments in years 1-6
 
-for i=[1 3 4 5 6];
-
+for i= [1 3 4 5 6];
      
 filename = ['deployment000' [num2str(i)] '_GP03FLMB.nc'];
 
-BlobDataLab(filename);
+[timec,swtemp,timec_new, swtemp_new,Temp_smooth,Temp_std]= BlobDataLab(filename);
 
 hold on
 
- end 
-    
+end
 
 
 %Prior work now in a function called BlobDataLab 

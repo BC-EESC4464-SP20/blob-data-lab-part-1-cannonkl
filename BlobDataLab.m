@@ -4,7 +4,7 @@ function [timec,swtemp,timec_new, swtemp_new,Temp_smooth,Temp_std] = BlobDataLab
 %BlobDataLab Summary of this function goes here
 %   function to assess all the years of data 
 %1a. Use the function "ncdisp" to display information about the data contained in this file
-ncdisp(filename)
+ncdisp(filename);
 
 %1b. Use the function "ncreadatt" to extract the latitude and longitude
 %attributes of this dataset
@@ -19,7 +19,7 @@ swtemp=ncread(filename,'ctdmo_seawater_temperature');
 % Extension option: Also extract the variable "pressure" (which, due to the
 % increasing pressure underwater, tells us about depth - 1 dbar ~ 1 m
 % depth). How deep in the water column was this sensor deployed?
-pressure=ncread(filename,'pressure');
+pressure=ncread(filename,'ctdmo_seawater_pressure');
 p_max=max(pressure);
 p_avg=mean(pressure);
 
@@ -54,10 +54,10 @@ k = find(Temp_std < 0.8);
 swtemp_new = swtemp(k);
 
 timec_new = timec(k);
-
+figure (1)
  subplot(2,1,1);
  title ('OOI Ocean Station Papa Oceana Temperature (30m)')
-plot(timec,swtemp,'b.')
+plot(timec,swtemp,'k.')
 datetick('x','dd-mmm-yyyy')
 ylabel('Seawater Temperature C^o')
 hold on 
@@ -66,14 +66,14 @@ hold on
 
 plot(timec,Temp_smooth,'r.')
 
-legend('raw data','moving mean','Location','best', 'FontSize',14)
+legend('raw data','moving mean','Location','best', 'FontSize',14);
 
 
-subplot(2,1,2); 
-title('Standard Deviation');
-plot(timec,Temp_std,'k')
-datetick('x','dd-mmm-yyyy')
-ylabel('1-day moving standard deviation')
+% subplot(2,1,2); 
+% title('Standard Deviation');
+% plot(timec,Temp_std,'k')
+% datetick('x','dd-mmm-yyyy')
+% ylabel('1-day moving standard deviation')
 
 end
 
