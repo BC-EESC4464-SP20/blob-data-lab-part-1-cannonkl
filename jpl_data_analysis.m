@@ -1,6 +1,6 @@
 filename_jpl ='jplMURSST41anommday_cb7b_4b2f_bb57.nc';
 
-ncdisp(filename_jpl);
+ncdisp(filename_jpl)
 
 lat=ncread(filename_jpl,'latitude');
 lat2 = double(lat);
@@ -14,7 +14,7 @@ OSPlong=-144.5149;
 
 figure (1)
 worldmap([20 60],[-179 -100])
-contourfm(lat2, lon2, sstAnom(:,:,14)','linecolor','none');
+contourfm(lat2, lon2, sstAnom(:,:,38)','linecolor','none');
 colorbar('eastoutside')
 geoshow('landareas.shp','FaceColor','black')
 hold on

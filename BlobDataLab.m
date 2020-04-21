@@ -1,5 +1,5 @@
 
-function [timec,swtemp,timec_new, swtemp_new,Temp_smooth,Temp_std] = BlobDataLab(filename);
+function [timec,swtemp,timec_new, swtemp_new,Temp_smooth,Temp_std,temp_smooth_new] = BlobDataLab(filename)
 
 %BlobDataLab Summary of this function goes here
 %   function to assess all the years of data 
@@ -49,12 +49,13 @@ Temp_std = movstd(swtemp,1440./resol(1));
 %6b. Find the indices of the data points that you are not excluding based
 %on the cutoff chosen in 6a.
 
-k = find(Temp_std < 0.8);
+k = find(Temp_std < 0.2);
 
 swtemp_new = swtemp(k);
 
 timec_new = timec(k);
 
+temp_smooth_new = movmean(swtemp_new,(1440./resol(1)));
 
 end
 

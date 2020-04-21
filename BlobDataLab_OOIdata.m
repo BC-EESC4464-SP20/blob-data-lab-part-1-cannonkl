@@ -5,7 +5,7 @@ for i= [1 3 4 5 6]
      
 filename = ['deployment000' num2str(i) '_GP03FLMB.nc'];
 
-[timec,swtemp,timec_new, swtemp_new,Temp_smooth,Temp_std]= BlobDataLab(filename);
+[timec,swtemp,timec_new, swtemp_new,Temp_smooth,Temp_std,temp_smooth_new]= BlobDataLab(filename);
 
 
 hold on
@@ -15,6 +15,7 @@ if i == 1
     timec_new_five = timec_new;
     swtemp_new_five = swtemp_new;
     temp_smooth_five = Temp_smooth;
+    temp_smooth_new_five = temp_smooth_new;
     temp_std_five = Temp_std;
 else
     timec_five = cat(1, timec_five, timec);
@@ -22,6 +23,7 @@ else
     timec_new_five = cat(1, timec_new_five, timec_new);
     swtemp_new_five = cat(1, swtemp_new_five, swtemp_new);
     temp_smooth_five = cat(1, temp_smooth_five, Temp_smooth); 
+    temp_smooth_new_five = cat(1,temp_smooth_new_five, temp_smooth_new);
     temp_std_five = cat(1, temp_std_five, Temp_std);
  
 end
@@ -37,7 +39,7 @@ hold on
 
 %plot(timec_new_five,swtemp_new_five,'b.')
 
-plot(timec_five,temp_smooth_five,'r.')
+plot(timec_new_five,temp_smooth_new_five,'r.')
 
 legend('raw data','moving mean','Location','best', 'FontSize',14);
 
