@@ -1,5 +1,5 @@
 
-function [timec,swtemp,timec_new, swtemp_new,Temp_smooth,Temp_std,temp_smooth_new] = BlobDataLab(filename)
+function [timec,swtemp,timec_new, swtemp_new,Temp_smooth,Temp_std,temp_smooth_new] = BlobDataLab(filename,cutoffval)
 
 %BlobDataLab Summary of this function goes here
 %   function to assess all the years of data 
@@ -37,25 +37,28 @@ timec=time0+(time/86400);
 % helpful here.
 
 resol=diff(time./60);
+resol=mean(resol);
 
 % 4a. Use the movmean function to calculate a 1-day (24 hour) moving mean
 % to smooth the data. 
-Temp_smooth = movmean(swtemp,(1440./resol(1)));
+minperday = 60*24;
+num2smooth = minperday/resol;
+Temp_smooth = movmean(swtemp,num2smooth);
 
 % 4b. Use the movstd function to calculate the 1-day moving standard
 % deviation of the data.
-Temp_std = movstd(swtemp,1440./resol(1));
+Temp_std = movstd(swtemp,num2smooth);
 
 %6b. Find the indices of the data points that you are not excluding based
 %on the cutoff chosen in 6a.
 
-k = find(Temp_std < 0.2);
+k = find(Temp_std < cutoffval);
 
 swtemp_new = swtemp(k);
 
 timec_new = timec(k);
 
-temp_smooth_new = movmean(swtemp_new,(1440./resol(1)));
+temp_smooth_new = movmean(swtemp_new,num2smooth;
 
 end
 
