@@ -11,12 +11,15 @@ sstAnom=ncread(filename_jpl,'sstAnom');
 OSPlat=50.3777;
 OSPlong=-144.5149;
 %%
+figure(1)
+imagesc(sstAnom(:,:,1))
 
-figure (1)
-worldmap([20 60],[-179 -100])
-contourfm(lat2, lon2, sstAnom(:,:,38)','linecolor','none');
-colorbar('eastoutside')
-geoshow('landareas.shp','FaceColor','black')
-hold on
-scatterm(OSPlat,OSPlong,40,'m','filled')
+% %%
+% figure (2)
+% worldmap([20 60],[-179 -100])
+% contourfm(lat2, lon2, sstAnom(:,:,38)','linecolor','none');
+% colorbar('eastoutside')
+% geoshow('landareas.shp','FaceColor','black')
+% hold on
+% scatterm(OSPlat,OSPlong,40,'m','filled')
 
